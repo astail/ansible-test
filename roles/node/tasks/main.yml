@@ -1,6 +1,0 @@
----
-
-- name: copy conf
-  template:
-    src: "keepalived.conf"
-    dest: "/tmp/keepalived.conf"

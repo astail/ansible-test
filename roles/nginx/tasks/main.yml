@@ -1,0 +1,32 @@
+---
+
+- name: common install
+  yum:
+    name:
+      - openssl
+      - openssl-devel
+      - mod_ssl
+
+- name: yum install yum-utils
+  yum:
+    name: yum-utils
+
+- name: copy nginx repo
+  copy:
+    src: nginx.repo
+    dest: /etc/yum.repos.d/nginx.repo
+    mode: 0644
+
+- name: rpm key
+  rpm_key:
+    key: https://nginx.org/keys/nginx_signing.key
+
+- name: install nginx
+  yum:
+    name: nginx
+
+- name: systemctl nginx start
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
